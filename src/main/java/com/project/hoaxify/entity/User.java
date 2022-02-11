@@ -1,6 +1,8 @@
 package com.project.hoaxify.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.project.hoaxify.annotaion.UniqeUserName;
+import com.project.hoaxify.dto.response.Views;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,11 @@ public class User {
 	@NotNull(message = "{hoaxify.constraints.username.NotNull.message}")
 	@Size(min = 4,max=64)
 	@UniqeUserName
+	@JsonView(Views.Base.class)
 	private String  username;
 	@NotNull
 	@Size(min = 2,max=64)
+	@JsonView(Views.Base.class)
 	private String displayName;
 
 	@Email
@@ -32,6 +36,9 @@ public class User {
 	@Size(min = 8,max=255)
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message="{hoaxify.constrain.password.Pattern.message}")
 	private  String password;
+
+	@JsonView(Views.Base.class) // response dönerken sadece bu verileri aldık
+	private String image;
 
 
 

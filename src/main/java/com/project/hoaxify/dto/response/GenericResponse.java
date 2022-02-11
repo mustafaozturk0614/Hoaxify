@@ -1,4 +1,4 @@
-package com.project.hoaxify.shared;
+package com.project.hoaxify.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -7,6 +7,7 @@ import Input from '../componenets/Input';
 import { withTranslation } from 'react-i18next';
 
 import ReactCountryFlag from "react-country-flag"
+import LanguageSelector from "../componenets/LanguageSelector";
 
 
 class UserSignupPage extends React.Component {
@@ -22,12 +23,7 @@ class UserSignupPage extends React.Component {
 
         }
     }
-    onChangeLAnguage = language => {
-        const { i18n } = this.props
-        i18n.changeLanguage(language)
-        changeLanguage(language)
 
-    }
 
     onChange = e => {
         const { t } = this.props
@@ -103,39 +99,8 @@ class UserSignupPage extends React.Component {
                             {t('Sign Up')}
                         </button>
                     </div>
-                    <div>
 
-                        <span ><ReactCountryFlag
-                            className="span"
-                            onClick={() => this.onChangeLAnguage('tr')}
-                            countryCode="TR"
-                            svg
-
-                            style={{
-                                margin: '0.5em',
-                                cursor: 'pointer',
-                                width: '3em',
-                                height: '3em',
-                            }}
-
-                        /> </span>
-
-                        <span > <ReactCountryFlag
-                            className='span'
-                            onClick={() => this.onChangeLAnguage('en')}
-                            countryCode="US"
-                            svg
-                            style={{
-                                cursor: 'pointer',
-                                width: '3em',
-                                height: '3em',
-                            }}
-
-                        />  </span>
-
-
-
-                    </div>
+                    <LanguageSelector/>
 
                 </form>
 
