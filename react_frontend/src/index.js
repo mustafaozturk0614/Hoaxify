@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
-import UserSignupPage from './pages/UserSignupPage';
 import reportWebVitals from './reportWebVitals';
 import './bootstrap_override.scss';
 import './i18n';
-import LoginPage from "./pages/LoginPage";
+
+import App from "./App";
+import AuthenticaitonContext from "./shared/AuthenticaitonContext";
 
 
 ReactDOM.render(
-  <React.StrictMode>
-      <LoginPage/>
+    <React.StrictMode>
+        <AuthenticaitonContext> <App/></AuthenticaitonContext>
 
-  </React.StrictMode>,
-  document.getElementById('root')
+
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

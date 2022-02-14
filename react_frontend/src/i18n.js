@@ -1,5 +1,5 @@
-import i18n, { init } from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n, {init} from "i18next";
+import {initReactI18next} from "react-i18next";
 
 i18n.use(initReactI18next).init({
     resources: {
@@ -11,7 +11,8 @@ i18n.use(initReactI18next).init({
                 'Display Name': 'Display Name',
                 'Password Repeat': 'Password Repeat',
                 'Password': 'Password',
-                'Login':'Login'
+                'Login': 'Login',
+                'Log Out': 'Log Out'
 
 
             }
@@ -25,8 +26,8 @@ i18n.use(initReactI18next).init({
                 'Password Repeat': 'Şifreyi Tekrarla',
                 'Display Name': 'Tercih edilen isim',
                 'Password': 'Şifre',
-                'Login':'Giriş Yap'
-
+                'Login': 'Giriş Yap',
+                'Log Out': 'Çıkış Yap'
 
             }
 
