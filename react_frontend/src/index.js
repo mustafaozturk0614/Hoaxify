@@ -4,14 +4,16 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import './bootstrap_override.scss';
 import './i18n';
-
+import {Provider} from "react-redux"
 import App from "./App";
-import AuthenticaitonContext from "./shared/AuthenticaitonContext";
+import configureStore from "./redux/configureStore";
+// import AuthenticaitonContext from "./shared/AuthenticaitonContext";
 
 
+const store = configureStore();
 ReactDOM.render(
     <React.StrictMode>
-        <AuthenticaitonContext> <App/></AuthenticaitonContext>
+        <Provider store={store}><App/></Provider>
 
 
     </React.StrictMode>,

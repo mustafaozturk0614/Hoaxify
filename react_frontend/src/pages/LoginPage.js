@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import Input from "../componenets/Input";
-
 import {withTranslation} from 'react-i18next'
 import LanguageSelector from "../componenets/LanguageSelector";
 import {login} from '../api/apiCalls'
-
 import ButtonWithProgress from "../componenets/ButtonWithProgress"
 import {withApiProgress} from "../shared/ApiProgress";
-import {Authentication} from "../shared/AuthenticaitonContext";
+import {connect} from "react-redux";
+import {loginHandler, loginSuccess} from "../redux/authActions";
+
+
+// import {Authentication} from "../shared/AuthenticaitonContext";
 
 class LoginPage extends Component {
-    static contextType = Authentication
+    // static contextType = Authentication
 
     state = {
         username: null,
@@ -24,13 +26,15 @@ class LoginPage extends Component {
     onClickLogin = async event => {
         event.preventDefault();
         const {username, password} = this.state;
-        const {onLoginSuccess} = this.context
+        const {history, dispatch} = this.props;
+        const {push} = history
+
+
         const creds = {
             username,
             password,
 
         }
-        const {push} = this.props.history
 
 
         this.setState({
@@ -38,16 +42,8 @@ class LoginPage extends Component {
 
         })
         try {
-            const response = await login(creds);
-
+            await dispatch(loginHandler(creds))
             push('/')
-            const authState = {
-                username: username,
-                password: password,
-                displayName: response.data.displayName,
-                image: response.data.image
-            }
-            onLoginSuccess(authState)
         } catch (apiError) {
             this.setState({
                     error: apiError.response.data.message
@@ -106,8 +102,16 @@ class LoginPage extends Component {
     }
 }
 
-
+// const mapDispatchToProps = dispatch => {
+//     return {
+//
+//         onLoginSuccess: (authState) => {
+//             return dispatch(loginSuccess(authState))
+//         }
+//     }
+//
+// }
 const LoginPageWithTranslation = withTranslation()(LoginPage);
 const LoginPagePageWithApiProgress = withApiProgress(LoginPageWithTranslation, "/api/auth")
 
-export default LoginPagePageWithApiProgress
+export default connect()(LoginPagePageWithApiProgress)

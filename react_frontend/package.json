@@ -16,9 +16,13 @@
     "react-country-flag": "^3.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.15.3",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
     "react-world-flags": "^1.4.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "secure-ls": "^1.2.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

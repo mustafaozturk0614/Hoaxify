@@ -1,27 +1,23 @@
 import React from 'react';
-import {Authentication} from "../shared/AuthenticaitonContext";
+// import {Authentication} from "../shared/AuthenticaitonContext";
 import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 const ProfileCard = (props) => {
 
 
-    return (
-        <Authentication.Consumer>
-            {value => {
-                const pathUsername = props.match.params.username
-                const loggedInUserName = value.state.username
-                let message = "we cannot edit"
-                if (pathUsername === loggedInUserName) {
-                    message = "we can edit"
-                }
-                return <div>{message}</div>
-            }}
+    const pathUsername = props.match.params.username
+    let message = "we cannot edit"
+    if (pathUsername === props.loggedInUserName) {
+        message = "we can edit"
+    }
+    return <div>{message}</div>
+}
+const mapStateToProps = store => {
 
+    return {
+        loggedInUserName: store.username
+    }
+}
 
-        </Authentication.Consumer>
-
-
-    );
-};
-
-export default withRouter(ProfileCard);
+export default connect(mapStateToProps)(withRouter(ProfileCard));

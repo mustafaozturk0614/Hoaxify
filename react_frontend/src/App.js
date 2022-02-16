@@ -8,15 +8,18 @@ import UserPage from "./pages/UserPage";
 import {Switch} from "react-router-dom"
 import TopBar from "./componenets/TopBar";
 
+
 import React, {Component} from 'react';
-import {Authentication} from "./shared/AuthenticaitonContext"
+import {connect} from "react-redux";
+
+// import {Authentication} from "./shared/AuthenticaitonContext"
 
 
 class App extends Component {
-    static  contextType = Authentication;
+    // static  contextType = Authentication;
 
     render() {
-        const isLoggedIn = this.context.state.isLoggedIn
+        const {isLoggedIn} = this.props
         return (
             <div>
                 <Router>
@@ -37,4 +40,10 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = store => {
+    return {
+        isLoggedIn: store.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps)(App);
