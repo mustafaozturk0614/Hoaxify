@@ -1,33 +1,34 @@
 import React from 'react';
 import {changeLanguage} from "../api/apiCalls";
 import ReactCountryFlag from "react-country-flag";
-import{withTranslation} from  'react-i18next'
+import {useTranslation} from 'react-i18next'
 
 const LanguageSelector = (props) => {
-  const  onChangeLAnguage = language => {
-        const { i18n } = props
+    const {i18n} = useTranslation()
+    const onChangeLAnguage = language => {
+
         i18n.changeLanguage(language)
         changeLanguage(language)
 
     }
     return (
         <div className="container">
-            <span ><ReactCountryFlag
+            <span><ReactCountryFlag
                 className="span"
-                            onClick={() => onChangeLAnguage('tr')}
-                            countryCode="TR"
-                            svg
+                onClick={() => onChangeLAnguage('tr')}
+                countryCode="TR"
+                svg
 
-                            style={{
-                                margin: '0.5em',
-                                cursor: 'pointer',
-                                width: '3em',
-                                height: '3em',
-                            }}
+                style={{
+                    margin: '0.5em',
+                    cursor: 'pointer',
+                    width: '3em',
+                    height: '3em',
+                }}
 
-                        /> </span>
+            /> </span>
 
-            <span > <ReactCountryFlag
+            <span> <ReactCountryFlag
                 className='span'
                 onClick={() => onChangeLAnguage('en')}
                 countryCode="US"
@@ -41,9 +42,8 @@ const LanguageSelector = (props) => {
             />  </span>
 
 
-
         </div>
     );
 };
 
-export default withTranslation()(LanguageSelector) ;
+export default (LanguageSelector);

@@ -7,13 +7,17 @@ import './i18n';
 import {Provider} from "react-redux"
 import App from "./App";
 import configureStore from "./redux/configureStore";
-// import AuthenticaitonContext from "./shared/AuthenticaitonContext";
+import AuthenticaitonContext from "./shared/AuthenticaitonContext";
 
 
 const store = configureStore();
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}><App/></Provider>
+        <Provider store={store}>
+            <AuthenticaitonContext> <App/></AuthenticaitonContext>
+
+
+        </Provider>
 
 
     </React.StrictMode>,
