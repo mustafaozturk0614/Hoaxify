@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next'
 import LanguageSelector from "../componenets/LanguageSelector";
 import {login} from '../api/apiCalls'
 import ButtonWithProgress from "../componenets/ButtonWithProgress"
-import {useApiProgress, withApiProgress} from "../shared/ApiProgress";
+import {withApiProgress} from "../shared/ApiProgress";
 import {useDispatch} from "react-redux";
 import {loginHandler, loginSuccess} from "../redux/authActions";
 
@@ -12,29 +12,33 @@ import {loginHandler, loginSuccess} from "../redux/authActions";
 // import {Authentication} from "../shared/AuthenticaitonContext";
 
 const LoginPage = props => {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
-    const [error, setError] = useState();
-    const dispatch = useDispatch();
+    const [username, setUsername] = useState()
+    const [password, setPassword] = useState()
+    const [error, setError] = useState()
+    const dispatch = useDispatch()
     useEffect(() => {
-        setError(undefined);
-    }, [username, password]);
+        setError(undefined)
+    }, [username, password])
+
     const onClickLogin = async event => {
         event.preventDefault();
+        // const {username, password} = this.state;
+        const {history} = props;
+        const {push} = history
         const creds = {
             username,
-            password
-        };
-        const {history} = props;
-        const {push} = history;
-        setError(undefined);
-        try {
-            await dispatch(loginHandler(creds));
-            push('/');
-        } catch (apiError) {
-            setError(apiError.response.data.message);
+            password,
+
         }
-    };
+
+        setError(undefined)
+        try {
+            await dispatch(loginHandler(creds))
+            push('/')
+        } catch (apiError) {
+            setError(apiError.response.data.message)
+        }
+    }
     // const onChange = event => {
     //     const {name, value} = event.target;
     //     // this.setState({
@@ -46,27 +50,40 @@ const LoginPage = props => {
     //
     // }
     const {t} = useTranslation();
-
-    const pendingApiCall = useApiProgress('/api/auth/');
-    console.log(pendingApiCall)
-
-    const buttonEnabled = username && password;
-
+    const {pendingApiCall} = props;
+    const buttonEnabled = username && password
     return (
+
         <div className="container">
+
             <form>
-                <h1 className="text-center">{t('Login')}</h1>
-                <Input label={t('Username')} onChange={event => setUsername(event.target.value)}/>
-                <Input label={t('Password')} type="password" onChange={event => setPassword(event.target.value)}/>
+                <h1 className='text-center'>{t('Login')}</h1>
+
+                <Input name='username' label={t('Username')} onChange={event => setUsername(event.target.value)}/>
+
+                <Input name="password" label={t('Password')} type="password"
+                       onChange={event => setPassword(event.target.value)}/>
+
                 {error && <div className="alert alert-danger">{error}</div>}
-                <div className="text-center">
-                    <ButtonWithProgress onClick={onClickLogin} disabled={!buttonEnabled || pendingApiCall}
-                                        pendingApiCall={pendingApiCall} text={t('Login')}/>
+                <br/>
+                <div className='text-center'>
+                    <ButtonWithProgress onClick={onClickLogin}
+                                        disabled={!buttonEnabled || pendingApiCall}
+                                        pendingApiCall={pendingApiCall}
+                                        text={t('Login')}
+                    >
+
+
+                    </ButtonWithProgress>
                 </div>
+
+
             </form>
         </div>
+
+
     );
-};
+}
 
 
 // const mapDispatchToProps = dispatch => {
