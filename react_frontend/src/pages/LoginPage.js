@@ -1,12 +1,11 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Input from "../componenets/Input";
 import {useTranslation} from 'react-i18next'
-import LanguageSelector from "../componenets/LanguageSelector";
-import {login} from '../api/apiCalls'
+
 import ButtonWithProgress from "../componenets/ButtonWithProgress"
 import {withApiProgress} from "../shared/ApiProgress";
 import {useDispatch} from "react-redux";
-import {loginHandler, loginSuccess} from "../redux/authActions";
+import {loginHandler} from "../redux/authActions";
 
 
 // import {Authentication} from "../shared/AuthenticaitonContext";
@@ -22,7 +21,7 @@ const LoginPage = props => {
 
     const onClickLogin = async event => {
         event.preventDefault();
-       
+
         const {history} = props;
         const {push} = history
         const creds = {
