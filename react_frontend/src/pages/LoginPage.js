@@ -22,7 +22,7 @@ const LoginPage = props => {
 
     const onClickLogin = async event => {
         event.preventDefault();
-        // const {username, password} = this.state;
+       
         const {history} = props;
         const {push} = history
         const creds = {
