@@ -1,5 +1,5 @@
 import *as ACTIONS from './actionTypes'
-import {login, signup} from "../api/apiCalls";
+import {cleanAuthorizationHeader, login, setAuthorizationHeader, signup} from "../api/apiCalls";
 
 export const logOutSuccess = () => {
 
@@ -14,18 +14,31 @@ export const loginSuccess = (authState) => {
 
     };
 };
+
+export const updateSuccess = (data) => {
+
+    return {
+        type: ACTIONS.UPDATE_SUCCESS,
+        payload: data
+    }
+}
+
+
 export const loginHandler = (credentials) => {
     return async function (dispatch) {
 
         const response = await login(credentials);
 
         const authState = {
-            ...response.data,
-            password: credentials.password
+
+            ...response.data.user,
+            password: credentials.password,
+            token: response.data.token
 
         }
 
         dispatch(loginSuccess((authState)));
+
         return response
     };
 

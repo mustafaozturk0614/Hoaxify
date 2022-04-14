@@ -11,6 +11,8 @@
     "context": "^2.0.1",
     "country-flag-icons": "^1.4.20",
     "i18next": "^21.6.11",
+    "javascript-time-ago": "^2.3.13",
+    "material-design-icons": "^3.0.1",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-country-flag": "^3.0.2",
@@ -23,6 +25,7 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "secure-ls": "^1.2.6",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

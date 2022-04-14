@@ -5,9 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor @NoArgsConstructor @Builder @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class GenericResponse {
 
-	private  String message;
+	private String message;
 
 }

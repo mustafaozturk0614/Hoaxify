@@ -1,13 +1,11 @@
 package com.project.hoaxify.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.hoaxify.annotaion.UniqeUserName;
-import com.project.hoaxify.dto.response.Views;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,12 +13,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 @Entity
 @Table(name = "users")
 
@@ -28,14 +27,12 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull(message = "{hoaxify.constraints.username.NotNull.message}")
-	@Size(min = 4, max = 64)
+	@NotNull(message = "{hoaxify.constraints.username.NotNull.message}") @Size(min = 4, max = 64)
 	@UniqeUserName
-	@JsonView(Views.Base.class)
+	//	@JsonView(Views.Base.class)
 	private String username;
-	@NotNull
-	@Size(min = 2, max = 64)
-	@JsonView(Views.Base.class)
+	@NotNull @Size(min = 2, max = 64)
+	//	@JsonView(Views.Base.class)
 	private String displayName;
 
 	@Email
@@ -45,7 +42,10 @@ public class User implements UserDetails {
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{hoaxify.constrain.password.Pattern.message}")
 	private String password;
 
-	@JsonView(Views.Base.class) // response dönerken sadece bu verileri aldık
+	//	@JsonView(Views.Base.class) // response dönerken sadece bu verileri aldık
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Hoax> hoaxes;
 	private String image;
 
 	@Override
@@ -54,6 +54,7 @@ public class User implements UserDetails {
 	}
 
 	@Override
+
 	public boolean isAccountNonExpired() {
 		return true;
 	}

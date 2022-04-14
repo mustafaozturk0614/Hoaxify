@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Input from '../componenets/Input';
 import {useTranslation} from 'react-i18next';
 import ButtonWithProgress from "../componenets/ButtonWithProgress"
-import {withApiProgress} from "../shared/ApiProgress"
+import {useApiProgress, withApiProgress} from "../shared/ApiProgress"
 import {useDispatch} from "react-redux";
 import {signUpHandler} from "../redux/authActions";
 
@@ -29,6 +29,7 @@ const UserSignupPage = props => {
         errorsCopy[name] = undefined;
         setErrors((previousErrors) => ({...previousErrors, [name]: undefined}))
         setForm((previousForm) => ({...previousForm, [name]: value}))
+        console.log(formSignup)
     }
     const onclickSignup = async e => {
         e.preventDefault();
@@ -46,7 +47,7 @@ const UserSignupPage = props => {
         } catch (error) {
             if (error.response.data.validationErrors) {
                 setErrors(error.response.data.validationErrors)
-                // this.setState({errors: error.response.data.validationErrors})
+
             }
         }
     }
@@ -56,7 +57,10 @@ const UserSignupPage = props => {
         password: passwordError,
         email,
     } = errors
-    const {pendingApiCall} = props
+    const pendingApiCallSignUp = useApiProgress('post', "/api/users")
+    const pendingApiCallLogin = useApiProgress('post', "/api/auth")
+
+    const pendingApiCall = pendingApiCallSignUp || pendingApiCallLogin
     let passwordRepeatError;
     if (formSignup.passwordRepeat !== formSignup.passwordRepeat) {
         passwordRepeatError = t('Password mismatch')
@@ -97,8 +101,5 @@ const UserSignupPage = props => {
 }
 
 
-const UserSignupPageWithApiProgress = withApiProgress(UserSignupPage, "/api/users")
-const UserSignupPageWithApiProgressForAuthRequst = withApiProgress(UserSignupPageWithApiProgress, "/api/auth")
-
-export default (UserSignupPageWithApiProgressForAuthRequst)
+export default UserSignupPage
 
