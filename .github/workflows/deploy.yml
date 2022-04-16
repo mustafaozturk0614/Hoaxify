@@ -31,8 +31,10 @@ jobs:
       run: |
         mkdir -p src/main/resources/static
         cp- -a ./react_frontend/build/. src/main/resources/static/
+        
     - name: Build spring
       run: mvn -B package --file pom.xml
+      
       working-directory: ./
      
     
