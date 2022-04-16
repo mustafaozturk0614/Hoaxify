@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ProfileCard from "../componenets/ProfileCard";
 import {getUser} from "../api/apiCalls";
-import {use} from "i18next";
+
 import {useParams} from "react-router-dom";
 import {useApiProgress} from "../shared/ApiProgress";
 import Spinner from "../componenets/Spinner";

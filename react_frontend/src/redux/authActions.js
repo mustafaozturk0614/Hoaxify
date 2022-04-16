@@ -1,11 +1,18 @@
 import *as ACTIONS from './actionTypes'
-import {cleanAuthorizationHeader, login, setAuthorizationHeader, signup} from "../api/apiCalls";
+import {login, logout, signup} from "../api/apiCalls";
 
 export const logOutSuccess = () => {
 
-    return {
-        type: ACTIONS.LOGOUT_SUCCESS
-    };
+    return async function (dispatch) {
+        try {
+            await logout();
+        } catch (err) {
+
+        }
+        dispatch({
+            type: ACTIONS.LOGOUT_SUCCESS
+        })
+    }
 };
 export const loginSuccess = (authState) => {
     return {

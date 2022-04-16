@@ -2,7 +2,7 @@ package com.project.hoaxify.service;
 
 import com.project.hoaxify.dto.resquest.UserUpdateRequestDto;
 import com.project.hoaxify.entity.User;
-import com.project.hoaxify.error.NotFounException;
+import com.project.hoaxify.error.NotFoundException;
 import com.project.hoaxify.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,7 +70,7 @@ public class UserService {
 		Optional<User> userindb = userRepository.findByUsername(username);
 
 		if (userindb.isEmpty()) {
-			throw new NotFounException();
+			throw new NotFoundException();
 
 		}
 		return userindb;

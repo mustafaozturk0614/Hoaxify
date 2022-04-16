@@ -3,7 +3,7 @@ import Input from "../componenets/Input";
 import {useTranslation} from 'react-i18next'
 
 import ButtonWithProgress from "../componenets/ButtonWithProgress"
-import {useApiProgress, withApiProgress} from "../shared/ApiProgress";
+import {useApiProgress} from "../shared/ApiProgress";
 import {useDispatch} from "react-redux";
 
 import {loginHandler} from "../redux/authActions";

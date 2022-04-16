@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import defaultPicture from '../asests/profile.png'
 import ProfileImageWithDefault from "./ProfileImageWithDefault";
 import {useTranslation} from "react-i18next";
 import Input from "./Input";
 import {deleteUser, updateUser} from "../api/apiCalls";
 import {useApiProgress} from "../shared/ApiProgress";
-import {use} from "i18next";
 import ButtonWithProgress from "./ButtonWithProgress";
 import {logOutSuccess, updateSuccess} from "../redux/authActions";
 import Modal from "./Modal";
@@ -106,6 +104,7 @@ const ProfileCard = (props) => {
         await deleteUser(username);
         setModalVisble(false)
         dispatch(logOutSuccess())
+        histoy.push('/')
         histoy.push('/')
     }
 

@@ -12,13 +12,6 @@ class AuthenticaitonContext extends Component {
         password: undefined,
     }
 
-    // onLoginSuccess = (authState) => {
-    //     this.setState({
-    //         ...authState,// (username,   displayName,image ,password
-    //         isLoggedIn: true
-    //     })
-    //
-    // }
     onLogOutSuccess = () => {
         this.setState({
             isLoggedIn: false,
